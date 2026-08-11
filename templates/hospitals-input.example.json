@@ -1,0 +1,21 @@
+{
+  "_readme": "discover_sources.py 的输入：医院清单（首次建立/新增医院时用）。homepage 为可选——批量新增时无需手动整理官网：有高德 Key 可先跑 lookup_homepages.py 自动补官网（零搜索）；没有 Key 则由 AI 对缺官网的医院逐家至多 1 次搜索补齐。用户直接提供官网主页（或公告直达页）地址填入 homepage 只是‘零搜索’的可选项。",
+  "hospitals": [
+    {
+      "id": "hangzhou-tcm",
+      "official_name": "杭州市中医院",
+      "aliases": ["市中医院", "浙江中医药大学附属杭州市中医院"],
+      "province": "浙江省",
+      "city": "杭州市",
+      "homepage": "https://www.hztcm.cn"
+    },
+    {
+      "id": "example-hospital-unknown-site",
+      "official_name": "示例市第一人民医院",
+      "aliases": ["示例一院"],
+      "province": "示例省",
+      "city": "示例市",
+      "homepage": ""
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "monitor_name": "示例医院采购监测",
+  "timezone": "Asia/Shanghai",
+  "schedule": {"frequency": "weekly", "weekday": "MON", "time": "10:00"},
+  "notification": {"email": "replace-with-user-confirmed-email@example.com"},
+  "keywords": {
+    "required": ["医疗信息化"],
+    "synonyms": ["医院信息系统", "HIS"],
+    "exclude": ["办公家具"],
+    "priority_notice_types": ["需求调查", "市场调研", "参数征集", "采购意向"],
+    "noise_link_texts": ["院务公开", "科研教育"]
+  },
+  "hospitals": [
+    {
+      "id": "example-hospital",
+      "official_name": "示例市第一人民医院",
+      "aliases": ["示例一院"],
+      "province": "示例省",
+      "city": "示例市",
+      "homepage": "https://example-hospital.example.com",
+      "confirmed": false
+    }
+  ],
+  "sources": [
+    {
+      "id": "example-hospital-notices",
+      "hospital_id": "example-hospital",
+      "name": "示例医院公告栏目",
+      "type": "hospital_official",
+      "mode": "html",
+      "url": "https://replace-with-confirmed-public-source.example/notices",
+      "confirmed": false,
+      "enabled": false,
+      "max_items": 40,
+      "pagination": {
+        "url_template": "https://replace-with-confirmed-public-source.example/notices/list-{page}.html",
+        "first_page": 2,
+        "max_pages": 5
+      },
+      "notes": "只在用户确认公开入口、适用范围与稳定性后启用。多页列表用 pagination 翻页（url 视为第 1 页）；来源没有分页时删除整个 pagination 字段。"
+    },
+    {
+      "id": "example-province-procurement",
+      "hospital_id": "example-hospital",
+      "name": "示例省政府采购网",
+      "type": "government_procurement",
+      "mode": "html",
+      "url": "https://replace-with-province-platform.example.gov.cn",
+      "confirmed": false,
+      "enabled": false,
+      "max_items": 40,
+      "notes": "示例：医院所在省/市政府采购或公共资源交易平台来源，URL 来自 discover_sources.py 实测确认。"
+    }
+  ]
+}

@@ -1,0 +1,455 @@
+{
+  "_readme": "省/市政府采购与公共资源交易平台预置表。discover_sources.py 按 hospitals[].province 查表实测；表中 URL 均为候选入口，是否可用以脚本实测为准。公共资源交易平台条目带 status 字段（2026-08-07 全量盘点）：ok=静态可采或门户聚合公告链接，可直接启用；js_ok=静态不可采但 Playwright 渲染后可采（需按 mode:\"js\" 启用，装可选依赖 playwright）；portal=可达但多为导航，需人工确认栏目；blocked=不可达（DNS/TLS/HTTP/超时）或 JS 壳，需人工核实域名或改用替代来源。表未覆盖的省份回退到国家级平台（ccgp.gov.cn / ggzy.gov.cn）。低维护频率的参考数据，可在实测发现失效后人工修正，避免每次启动都用 AI 搜索。",
+  "national": [
+    {
+      "source_type": "government_procurement",
+      "name": "中国政府采购网",
+      "url": "http://www.ccgp.gov.cn",
+      "note": "国家级政采公告；列表 JS 渲染，Playwright 渲染后可采（建议 mode:js，翻页 index_{page}.htm 适配 pagination），偶发限流需重试"
+    },
+    {
+      "source_type": "public_resources",
+      "name": "全国公共资源交易平台",
+      "url": "https://www.ggzy.gov.cn",
+      "status": "ok",
+      "note": "首页即聚合各省交易公告链接（含详情页），可采"
+    }
+  ],
+  "provinces": {
+    "北京市": [
+      {
+        "source_type": "government_procurement",
+        "name": "北京市政府采购网",
+        "url": "http://www.ccgp-beijing.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "北京市公共资源交易服务平台",
+        "url": "https://ggzyfw.beijing.gov.cn/",
+        "status": "js_ok",
+        "note": "TLS 证书问题；Playwright 渲染后可采（388 链接/198 长标题）"
+      }
+    ],
+    "天津市": [
+      {
+        "source_type": "government_procurement",
+        "name": "天津市政府采购网",
+        "url": "http://www.ccgp-tianjin.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "天津市公共资源交易网",
+        "url": "https://ggzy.zwfwb.tj.gov.cn/",
+        "status": "ok",
+        "note": "272 链接/189 长标题（2026-08-07 盘点实测）"
+      }
+    ],
+    "河北省": [
+      {
+        "source_type": "government_procurement",
+        "name": "河北省政府采购网",
+        "url": "http://www.ccgp-hebei.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "河北省公共资源交易中心",
+        "url": "https://szj.hebei.gov.cn/hbjyzx/",
+        "status": "ok",
+        "note": "133 链接/79 长标题（2026-08-07 盘点实测）"
+      }
+    ],
+    "山西省": [
+      {
+        "source_type": "government_procurement",
+        "name": "山西省政府采购网",
+        "url": "http://www.ccgp-shanxi.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "山西省招标投标公共服务平台",
+        "url": "https://www.sxbid.com.cn/",
+        "status": "ok",
+        "note": "158 链接/129 长标题（招标投标平台）"
+      }
+    ],
+    "内蒙古自治区": [
+      {
+        "source_type": "government_procurement",
+        "name": "内蒙古自治区政府采购网",
+        "url": "http://www.ccgp-neimenggu.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "内蒙古自治区公共资源交易网",
+        "url": "https://ggzyjy.nmg.gov.cn",
+        "status": "ok",
+        "note": "115 链接，含公告"
+      }
+    ],
+    "辽宁省": [
+      {
+        "source_type": "government_procurement",
+        "name": "辽宁省政府采购网",
+        "url": "http://www.ccgp-liaoning.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "辽宁省公共资源交易平台",
+        "url": "http://ggzy.ln.gov.cn",
+        "status": "ok",
+        "note": "97 链接，长标题公告为主"
+      }
+    ],
+    "吉林省": [
+      {
+        "source_type": "government_procurement",
+        "name": "吉林省政府采购网",
+        "url": "http://www.ccgp-jilin.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "吉林省公共资源交易公共服务平台",
+        "url": "http://www.jl.gov.cn/ggzy/",
+        "status": "ok",
+        "note": "81 链接（省政府门户子站）"
+      }
+    ],
+    "黑龙江省": [
+      {
+        "source_type": "government_procurement",
+        "name": "黑龙江省政府采购网",
+        "url": "http://www.ccgp-hlj.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "黑龙江省公共资源交易网",
+        "url": "https://ggzyjyw.hlj.gov.cn/",
+        "status": "ok",
+        "note": "376 链接/157 长标题"
+      }
+    ],
+    "上海市": [
+      {
+        "source_type": "government_procurement",
+        "name": "上海政府采购网",
+        "url": "http://www.zfcg.sh.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "上海市公共资源交易中心",
+        "url": "https://www.shggzy.com/",
+        "status": "blocked",
+        "note": "框架页，静态与 Playwright 渲染后均无公告数据"
+      }
+    ],
+    "江苏省": [
+      {
+        "source_type": "government_procurement",
+        "name": "江苏省政府采购网",
+        "url": "http://www.ccgp-jiangsu.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "江苏省公共资源交易平台",
+        "url": "http://jsggzy.jszwfw.gov.cn/",
+        "status": "js_ok",
+        "note": "TLS 证书问题；Playwright 渲染后可采（99 链接/62 长标题）"
+      }
+    ],
+    "浙江省": [
+      {
+        "source_type": "government_procurement",
+        "name": "浙江省政府采购网（政采云）",
+        "url": "https://www.zcygov.cn",
+        "note": "政采云门户无公开公告列表，公告需登录，不建议纳入"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "浙江省公共资源交易服务平台",
+        "url": "https://ggzy.zj.gov.cn",
+        "status": "ok",
+        "note": "115 链接/48 带日期，最稳来源之一"
+      }
+    ],
+    "安徽省": [
+      {
+        "source_type": "government_procurement",
+        "name": "安徽省政府采购网",
+        "url": "http://www.ccgp-anhui.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "安徽省公共资源交易监管网",
+        "url": "https://ggzy.ah.gov.cn",
+        "status": "portal",
+        "note": "30 链接，多为导航，需人工确认栏目"
+      }
+    ],
+    "福建省": [
+      {
+        "source_type": "government_procurement",
+        "name": "福建省政府采购网",
+        "url": "http://www.ccgp-fujian.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "福建省公共资源交易电子公共服务平台",
+        "url": "https://ggzyfw.fujian.gov.cn/index/new",
+        "status": "ok",
+        "note": "21 链接"
+      }
+    ],
+    "江西省": [
+      {
+        "source_type": "government_procurement",
+        "name": "江西省政府采购网",
+        "url": "http://www.ccgp-jiangxi.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "江西省公共资源交易平台",
+        "url": "http://www.jxsggzy.cn",
+        "status": "ok",
+        "note": "74 链接/33 带日期，可采正例"
+      }
+    ],
+    "山东省": [
+      {
+        "source_type": "government_procurement",
+        "name": "山东省政府采购网",
+        "url": "http://www.ccgp-shandong.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "山东省公共资源交易网",
+        "url": "https://ggzyjyzx.shandong.gov.cn/",
+        "status": "ok",
+        "note": "130 链接/75 长标题（2026-08-07 盘点实测）"
+      }
+    ],
+    "河南省": [
+      {
+        "source_type": "government_procurement",
+        "name": "河南省政府采购网",
+        "url": "http://www.hngp.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "河南省公共资源交易中心",
+        "url": "https://hnsggzyjy.henan.gov.cn/",
+        "status": "js_ok",
+        "note": "TLS 握手异常；Playwright 渲染后可采（181 链接/45 带日期，2026-08-07 盘点实测）"
+      }
+    ],
+    "湖北省": [
+      {
+        "source_type": "government_procurement",
+        "name": "湖北省政府采购网",
+        "url": "http://www.ccgp-hubei.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "湖北省公共资源交易电子服务系统",
+        "url": "https://www.hbggzyfwpt.cn/",
+        "status": "ok",
+        "note": "57 链接/27 长标题"
+      }
+    ],
+    "湖南省": [
+      {
+        "source_type": "government_procurement",
+        "name": "湖南省政府采购网",
+        "url": "http://www.ccgp-hunan.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "湖南省招标投标监管网",
+        "url": "http://bidding.fgw.hunan.gov.cn/",
+        "status": "ok",
+        "note": "86 链接/69 长标题"
+      }
+    ],
+    "广东省": [
+      {
+        "source_type": "government_procurement",
+        "name": "广东省政府采购网",
+        "url": "https://gdgpo.czt.gd.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "广东省公共资源交易平台(粤公平)",
+        "url": "https://ygp.gdzwfw.gov.cn/#/",
+        "status": "portal",
+        "note": "SPA，渲染后内容少（7 链接）"
+      }
+    ],
+    "广西壮族自治区": [
+      {
+        "source_type": "government_procurement",
+        "name": "广西壮族自治区政府采购网",
+        "url": "http://www.ccgp-guangxi.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "广西壮族自治区招标投标公共服务平台",
+        "url": "http://zbtb.gxi.gov.cn:9000/",
+        "status": "portal",
+        "note": "5 链接"
+      }
+    ],
+    "海南省": [
+      {
+        "source_type": "government_procurement",
+        "name": "海南省政府采购网",
+        "url": "http://www.ccgp-hainan.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "全国公共资源交易平台(海南省)",
+        "url": "https://ggzy.hainan.gov.cn/",
+        "status": "js_ok",
+        "note": "Playwright 渲染后可采（63 链接/21 长标题）"
+      }
+    ],
+    "重庆市": [
+      {
+        "source_type": "government_procurement",
+        "name": "重庆市政府采购网",
+        "url": "http://www.ccgp-chongqing.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "重庆市公共资源交易网",
+        "url": "https://www.cqggzy.com",
+        "status": "ok",
+        "note": "147 链接，门户聚合"
+      }
+    ],
+    "四川省": [
+      {
+        "source_type": "government_procurement",
+        "name": "四川省政府采购网",
+        "url": "http://www.ccgp-sichuan.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "四川省公共资源交易信息网",
+        "url": "https://ggzyjy.sc.gov.cn",
+        "status": "ok",
+        "note": "44 链接，门户聚合"
+      }
+    ],
+    "贵州省": [
+      {
+        "source_type": "government_procurement",
+        "name": "贵州省政府采购网",
+        "url": "http://www.ccgp-guizhou.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "贵州省招标投标公共服务平台",
+        "url": "http://ztb.guizhou.gov.cn/",
+        "status": "portal",
+        "note": "16 链接"
+      }
+    ],
+    "云南省": [
+      {
+        "source_type": "government_procurement",
+        "name": "云南省政府采购网",
+        "url": "http://www.yngp.com"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "云南省公共资源交易信息网",
+        "url": "https://ggzy.yn.gov.cn/",
+        "status": "blocked",
+        "note": "渲染后仍无公告数据，可能需登录或另寻入口"
+      }
+    ],
+    "西藏自治区": [
+      {
+        "source_type": "government_procurement",
+        "name": "西藏自治区政府采购网",
+        "url": "http://www.ccgp-xizang.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "西藏自治区公共资源交易网",
+        "url": "http://ggzy.xizang.gov.cn",
+        "status": "portal",
+        "note": "8 链接，内容少，需人工确认"
+      }
+    ],
+    "陕西省": [
+      {
+        "source_type": "government_procurement",
+        "name": "陕西省政府采购网",
+        "url": "http://www.ccgp-shaanxi.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "陕西省公共资源交易平台",
+        "url": "https://ggzy.shaanxi.gov.cn",
+        "status": "ok",
+        "note": "114 链接，含公告"
+      }
+    ],
+    "甘肃省": [
+      {
+        "source_type": "government_procurement",
+        "name": "甘肃省政府采购网",
+        "url": "http://www.ccgp-gansu.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "甘肃省公共资源交易网",
+        "url": "https://ggzyjy.gansu.gov.cn/",
+        "status": "blocked",
+        "note": "412 反爬拦截，Playwright 渲染亦无数据（body 39B）"
+      }
+    ],
+    "青海省": [
+      {
+        "source_type": "government_procurement",
+        "name": "青海省政府采购网",
+        "url": "http://www.ccgp-qinghai.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "青海省电子招标投标公共服务平台",
+        "url": "https://www.qhdzzbfw.gov.cn/fwpt/",
+        "status": "portal",
+        "note": "16 链接"
+      }
+    ],
+    "宁夏回族自治区": [
+      {
+        "source_type": "government_procurement",
+        "name": "宁夏回族自治区政府采购网",
+        "url": "http://www.ccgp-ningxia.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "宁夏回族自治区公共资源交易网",
+        "url": "https://ggzyjy.fzggw.nx.gov.cn/",
+        "status": "ok",
+        "note": "121 链接/72 长标题"
+      }
+    ],
+    "新疆维吾尔自治区": [
+      {
+        "source_type": "government_procurement",
+        "name": "新疆维吾尔自治区政府采购网",
+        "url": "http://www.ccgp-xinjiang.gov.cn"
+      },
+      {
+        "source_type": "public_resources",
+        "name": "新疆维吾尔自治区公共资源交易网",
+        "url": "https://ggzy.xinjiang.gov.cn",
+        "status": "ok",
+        "note": "419 链接/198 长标题，公告量大"
+      }
+    ]
+  }
+}

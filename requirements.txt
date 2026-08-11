@@ -1,0 +1,7 @@
+# Optional. CSV, JSON, SQLite and HTML/RSS collection use only Python's standard library.
+# Install these packages only when the corresponding feature is needed.
+openpyxl>=3.1,<4
+# playwright: optional enhancement for JS-rendered sources (sources[].mode="js").
+# Uses the system Chrome/Edge via channel (no browser download needed).
+# Without it, JS rendering falls back to system-browser --dump-dom.
+playwright>=1.40

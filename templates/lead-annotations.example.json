@@ -1,0 +1,26 @@
+[
+  {
+    "notice_id": "sha256 id from candidates.json",
+    "relevant": true,
+    "hospital_name": "（可选）覆盖 source 绑定的医院归属，用于 agency 等覆盖多家医院的来源",
+    "ai_reason": "公告明确征集医院信息系统升级方案，且发布主体为目标医院。",
+    "project_type": "医院信息系统",
+    "notice_type": "市场调研",
+    "budget": "",
+    "deadline": "",
+    "status": "新线索",
+    "notes": "请商务负责人复核公告正文与截止时间。"
+  },
+  {
+    "notice_id": "被判不相关的候选也必须写入，避免以后重复送审",
+    "relevant": false,
+    "ai_reason": "公告为患者食堂餐饮服务招标，与已确认项目方向无关。"
+  },
+  {
+    "notice_id": "已入库线索的 notice_id（无需重新采集/审阅）",
+    "update": true,
+    "status": "跟进中",
+    "notes": "商务已联系设备科，等待参数征集文件。"
+  }
+]
+

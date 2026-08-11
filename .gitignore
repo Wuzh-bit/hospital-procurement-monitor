@@ -1,0 +1,12 @@
+# Per-user monitoring state; never commit these files.
+monitor-data/
+monitor-data-fresh/
+.workbuddy/
+*.sqlite3
+*.db
+*.xlsx
+*.xls
+raw/
+reports/
+__pycache__/
+*.py[cod]
